@@ -10,10 +10,16 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
+const countriesData = require("world-countries");
 
 // Passport settings
+//----------------------------------------------------------------
 require("./config/passport-setup");
 
+
+
+// MONGOOSE SETUP
+//----------------------------------------------------------------
 mongoose
   .connect('mongodb://localhost/linkall-server', {useNewUrlParser: true})
   .then(x => {
@@ -25,6 +31,43 @@ mongoose
 
 const app = express();
 
+// MONGOSTORE SETUP
+//---------------------------------------------------------------
+// Make the app create sessions & cookies for every browser/device
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  //secret session must be different for every app DONE
+  secret: process.env.SESSION_SECRET,
+  //save session info inside ou MongoDB
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}
+
+));
+
+
+// Passport Auth settings
+//----------------------------------------------------------------
+// Activate some of the passport methods in the routes
+app.use(passport.initialize());
+// Load the logged
+app.use(passport.session());
+
+
+// Middleware Setup
+//----------------------------------------------------------------
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Express View engine setup
+//----------------------------------------------------------------
+app.use(express.static(path.join(__dirname, 'public')));
+      
+
+// CORS SETTINGS
+//----------------------------------------------------------------
 // Allow Cross-Origin-Resource-Sharing : CORS
 //(allows access to the API from other domains/origins)
 app.use(cors({
@@ -35,31 +78,14 @@ app.use(cors({
 })
 );
 
-// Middleware Setup
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// Express View engine setup
-// Express View engine setup
-app.use(express.static(path.join(__dirname, 'public')));
-      
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
-// default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
+// ROUTES
+//----------------------------------------------------------------
 
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 
 
 module.exports = app;

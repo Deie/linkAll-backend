@@ -8,8 +8,10 @@
     "dev-windows": "nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
     "dotenv": "^6.0.0",
@@ -17,7 +19,6 @@
     "express-session": "^1.15.6",
     "express-user": "^1.2.0",
     "logger": "0.0.1",
-    "mongo-connect": "0.0.6",
     "mongoose": "^5.2.10",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
