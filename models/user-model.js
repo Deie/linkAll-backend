@@ -21,10 +21,12 @@ const userSchema = new Schema(
     gender: {
       type: String,
       enum: ["female", "male", "neutral"],
-      require: true
+      required: true
     },
-    description: { type: String, maxlength: 72 },
-    channelsBookmark: { type: Array}
+    description: { type: String, maxlength: 72, match: /^(#+\w{2,})( #+\w{2,}){0,5}$/ },
+    state: { type: String, enum: ["online", "offline", "blocked"]},
+    channelsBookmark: { type: Array },
+    friendsBookmark: { type: Array }
   },
   {
     timestamps: true
