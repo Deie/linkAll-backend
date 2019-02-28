@@ -72,7 +72,7 @@ app.use(cors({
   // receive cookies from other domains/origins
   credentials: true,
   // only these domains/origins can access the API
-  origin: ["http://localhost:3333"]
+  origin: ["http://localhost:5000"]
 })
 );
 
@@ -85,6 +85,7 @@ const auth = require("./routes/auth-router");
 // (ex: "/logout" =>>> "/api/logout")
 app.use("/api", auth);
 
-
+const countries = require("./routes/countries-router");
+app.use("/api/coutries", countries);
 
 module.exports = app;
