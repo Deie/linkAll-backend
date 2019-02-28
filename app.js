@@ -68,8 +68,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // CORS SETTINGS
 //----------------------------------------------------------------
-// Allow Cross-Origin-Resource-Sharing : CORS
-//(allows access to the API from other domains/origins)
 app.use(cors({
   // receive cookies from other domains/origins
   credentials: true,
@@ -82,10 +80,11 @@ app.use(cors({
 
 // ROUTES
 //----------------------------------------------------------------
+const auth = require("./routes/auth-router");
+// all routes in the phone router will start with "/api"
+// (ex: "/logout" =>>> "/api/logout")
+app.use("/api", auth);
 
-
-// const index = require('./routes/index');
-// app.use('/', index);
 
 
 module.exports = app;
