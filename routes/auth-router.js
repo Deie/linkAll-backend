@@ -15,11 +15,11 @@ router.post("/process-signup", (req, res, next) => {
     pseudo, 
     age, 
     location, 
-    profileImg, 
     gender, 
     description
   } = req.body;
-
+  
+  
   // enforce password rules (can't be empty and MUST have a digit)
   if (!originalPassword || !originalPassword.match(/[0-9]/)) {
     // this is like next(err) but we creating our own object
@@ -27,9 +27,14 @@ router.post("/process-signup", (req, res, next) => {
     // use return to STOP the function here if the password is BAD
     return;
   }
-
+  
   // encrypt the user's password before saving it
   const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
+  let { profileImg } = req.body;
+
+  if (!profileImg) {
+    profileImg = "http://example.com/any.gif";
+  }
 
   User.create(
     { 
@@ -41,11 +46,7 @@ router.post("/process-signup", (req, res, next) => {
       location, 
       profileImg, 
       gender, 
-      description, 
-      role, 
-      state, 
-      channelsBookmark, 
-      friendsBookmark
+      description
     }
   ).then((userDoc) => {
       // Automatically log in the user after signup an account
