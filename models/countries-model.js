@@ -6,11 +6,11 @@ const countriesSchema = new Schema(
   {
     name: { type: String },
     flag: { type: String },
-    capital: { type: String, },
-    region: { type: String, },
-    altSpellings: { type: String, },
-    languages: { type: String, },
-    translations: { type: Array, }
+    capital: { type: String },
+    region: { type: String },
+    altSpellings: { type: String },
+    languages: { type: String },
+    translations: { type: Array }
   },
   {
     timestamps: true
@@ -19,4 +19,4 @@ const countriesSchema = new Schema(
 
 const Countries = mongoose.model("Countries", countriesSchema);
 
-module.exports = Countries
+module.exports = Countries;
