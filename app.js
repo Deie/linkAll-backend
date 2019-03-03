@@ -83,4 +83,7 @@ app.use("/api", auth);
 const countries = require("./routes/countries-router");
 app.use("/api/countries", countries);
 
+const account = require("./routes/userAccount-router");
+app.use("/api/account", account);
+
 module.exports = app;
