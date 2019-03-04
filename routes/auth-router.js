@@ -33,7 +33,7 @@ router.post("/process-signup", (req, res, next) => {
   let { profileImg } = req.body;
 
   if (!profileImg) {
-    profileImg = "../public/images/userDefault.svg";
+    profileImg = "/images/userDefault.svg";
   }
 
   User.create(

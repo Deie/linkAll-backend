@@ -13,4 +13,17 @@ router.get("/:userPseudo", (req, res, next) => {
 });
 
 
+router.post("/:userPseudo/edit-user", (req, res, next) => {
+  const { userPseudo } = req.params;
+  const { fullName, location } = req.body;
+
+  User.findOneAndUpdate(
+    { pseudo: { $eq: userPseudo } },
+    { $set: { fullName, location } },
+    { runValidators: true, new: true }
+  )
+    .then(userDocEdit => res.json(userDocEdit))
+    .catch(err => next(err));
+});
+
 module.exports = router;
