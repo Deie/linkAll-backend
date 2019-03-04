@@ -10,11 +10,11 @@ const countriesSchema = new Schema(
     region: { type: String },
     altSpellings: { type: String },
     languages: { type: String },
-    translations: { type: Array }
+    translations: { type: Array },
+    RoomsCategories: { type: Array }
   },
-  {
-    timestamps: true
-  }
+
+  { timestamps: true }
 );
 
 const Countries = mongoose.model("Countries", countriesSchema);
