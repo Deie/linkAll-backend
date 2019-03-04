@@ -16,7 +16,7 @@ const userSchema = new Schema(
     },
     age: { type: Number, require: true, min: 18, },
     location: { type: String, required: true },
-    profileImg: { type: String, required: true },
+    profileImg: { type: String, required: true, default:"../public/images/userDefault.svg" },
     gender: {
       type: String,
       enum: ["female", "male", "neutral"],
