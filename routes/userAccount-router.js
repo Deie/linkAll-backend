@@ -14,11 +14,11 @@ router.get("/:userName", (req, res, next) => {
 
 router.post("/:userName/edit-user", (req, res, next) => {
   const { userName } = req.params;
-  const { fullName, location } = req.body;
+  const { fullName, location, age, description, avatarURL } = req.body;
 
   User.findOneAndUpdate(
     { name: { $eq: userName } },
-    { $set: { fullName, location } },
+    { $set: { fullName, location, age, description, avatarURL } },
     { runValidators: true, new: true }
   )
     .then(userDocEdit => {
@@ -30,27 +30,27 @@ router.post("/:userName/edit-user", (req, res, next) => {
 router.delete("/:userPseudo/delete", (req, res, next) => {
   const { userPseudo } = req.params;
 
-  User.findOneAndDelete(userPseudo)
+  User.findOneAndDelete(userName)
     .then(userDeleted => res.json(userDeleted))
     .catch(err => next(err));
 });
 
-router.post("/:userPseudo/bookmark", (req, res, next) => {
-  const { userPseudo } = req.params;
+// router.post("/:userName/bookmark", (req, res, next) => {
+//   const { userName } = req.params;
 
-  console.log(req.body);
+//   console.log(req.body);
 
-  User.findOne({ pseudo: { $eq: userPseudo } })
-    .then(countrieFavArray => {
-      Countrie.findByIdAndUpdate(
-        req.user._id,
-        { $push: { friendsBookmark: userVisited._id } },
-        { runValidators: true, new: true }
-      )
-        .then(userDocEdit => res.json(userDocEdit))
-        .catch(err => next(err));
-    })
-    .catch(err => next(err));
-});
+//   User.findOne({ name: { $eq: userName } })
+//     .then(countrieFavArray => {
+//       Countrie.findByIdAndUpdate(
+//         req.user._id,
+//         { $push: { friendsBookmark: userVisited._id } },
+//         { runValidators: true, new: true }
+//       )
+//         .then(userDocEdit => res.json(userDocEdit))
+//         .catch(err => next(err));
+//     })
+//     .catch(err => next(err));
+// });
 
 module.exports = router;
