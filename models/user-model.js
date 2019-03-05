@@ -19,8 +19,8 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
       required: true,
-      default: "../images/userDefault.svg"
-    }, // linked to CHATKIT img
+      default: "../images/userDefault.svg" // linked to CHATKIT img
+    },
     gender: {
       type: String,
       enum: ["female", "male", "neutral"],
@@ -32,7 +32,7 @@ const userSchema = new Schema(
       match: /^(#+\w{2,})( #+\w{2,}){0,5}$/
     },
     state: { type: String, enum: ["online", "offline", "blocked"] },
-    channelsBookmark: { type: Array },
+    channelsBookmark: { type: Array }
   },
   {
     timestamps: true
