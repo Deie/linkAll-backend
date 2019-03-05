@@ -23,9 +23,8 @@ const userSchema = new Schema(
       required: true
     },
     description: { type: String, maxlength: 72, match: /^(#+\w{2,})( #+\w{2,}){0,5}$/ },
-    state: { type: String, enum: ["online", "offline", "blocked"]},
-    channelsBookmark: { type: Array },
-    friendsBookmark: { type: Array }
+    userState: { type: String, enum: ["online", "offline", "blocked"]},
+    channelsBookmark: [{ type: Schema.Types.ObjectId, ref: "Countries" } ] 
   },
   {
     timestamps: true
