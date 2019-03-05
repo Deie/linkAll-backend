@@ -19,12 +19,12 @@ countriesModel
   .find()
   .then(AllCountries => {
     AllCountries.forEach(oneElement => {
-      oneElement.RoomsCategories.push(
-        "Travel in",
-        "Fooding",
-        "Culture & language",
-        "Time Out"
-      );
+      oneElement.RoomsCategories = [
+        { roomName: "Travel in" },
+        { roomName: "Fooding" },
+        { roomName: "Culture & language" },
+        { roomName: "Time Out" }
+      ];
       oneElement
         .save()
         .then(console.log("updated, it worked"))

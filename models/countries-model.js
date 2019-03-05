@@ -11,7 +11,12 @@ const countriesSchema = new Schema(
     altSpellings: { type: String },
     languages: { type: String },
     translations: { type: Array },
-    RoomsCategories: { type: Array }
+    RoomsCategories: [
+      {
+        roomName: { type: String },
+        chatkitId: { type: Number }
+      }
+    ]
   },
 
   { timestamps: true }
