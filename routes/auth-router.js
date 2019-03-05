@@ -27,10 +27,10 @@ router.post("/process-signup", (req, res, next) => {
 
   // encrypt the user's password before saving it
   const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
-  let { profileImg } = req.body;
+  let { avatarURL } = req.body;
 
-  if (!profileImg) {
-    profileImg = "/images/userDefault.svg";
+  if (!avatarURL) {
+    avatarURL = "/images/userDefault.svg";
   }
 
   User.create({
@@ -40,7 +40,7 @@ router.post("/process-signup", (req, res, next) => {
     name,
     age,
     location,
-    profileImg,
+    avatarURL,
     gender,
     description
   })
