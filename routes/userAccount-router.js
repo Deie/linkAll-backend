@@ -4,35 +4,21 @@ const User = require("../models/user-model");
 
 const router = express.Router();
 
-router.get("/:userPseudo", (req, res, next) => {
-  const { userPseudo } = req.params;
+router.get("/:userName", (req, res, next) => {
+  const { userName } = req.params;
 
-  User.findOne({ pseudo: { $eq: userPseudo } })
+  User.findOne({ name: { $eq: userName } })
     .then(userDoc => res.json(userDoc))
     .catch(err => next(err));
 });
 
-router.get("/:userPseudo/edit", (req, res, next) => {
-  const { userPseudo } = req.params;
-  console.log(req.params.userPseudo, "get request");
-
-  User.findOne({ pseudo: { $eq: userPseudo } })
-    .then(userDoc => {
-      res.json(userDoc), console.log("here is the get");
-    })
-    .catch(err => next(err));
-});
-
-router.post("/:userPseudo/edit", (req, res, next) => {
-  const { userPseudo } = req.params;
-
-  console.log(req.params.userPseudo, "post");
-
-  const { fullName, age, location, profileImg, gender, description } = req.body;
+router.post("/:userName/edit-user", (req, res, next) => {
+  const { userName } = req.params;
+  const { fullName, location } = req.body;
 
   User.findOneAndUpdate(
-    { pseudo: { $eq: userPseudo } },
-    { $set: { fullName, age, location, profileImg, gender, description } },
+    { name: { $eq: userName } },
+    { $set: { fullName, location } },
     { runValidators: true, new: true }
   )
     .then(userDocEdit => {
