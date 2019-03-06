@@ -1,9 +1,15 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const Chatkit = require("@pusher/chatkit-server");
 
 const User = require("../models/user-model.js");
 
 const router = express.Router();
+
+const chatkit = new Chatkit.default({
+  instanceLocator: process.env.CHATKIT_LOCATOR,
+  key: process.env.CHATKIT_KEY
+});
 
 router.post("/process-signup", (req, res, next) => {
   const {
@@ -47,11 +53,18 @@ router.post("/process-signup", (req, res, next) => {
     .then(userDoc => {
       // Automatically log in the user after signup an account
       req.login(userDoc, () => {
-        console.log(userDoc);
-
-        // hide encryptedPassword before sending the json (its a security risk)
-        userDoc.encryptedPassword = undefined;
-        res.json(userDoc);
+        chatkit
+          .createUser({
+            id: userDoc._id,
+            name: userDoc.name,
+            avatarURL: userDoc.avatarURL
+          })
+          .then(() => {
+            // hide encryptedPassword before sending the json (its a security risk)
+            userDoc.encryptedPassword = undefined;
+            res.json(userDoc);
+          })
+          .catch(err => next(err));
       });
     })
     .catch(err => next(err));
