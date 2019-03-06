@@ -5,7 +5,7 @@ const axios = require("axios");
 const Countries = require('../models/countries-model');
 
 mongoose
-  .connect('mongodb://localhost/linkall-server', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

@@ -32,7 +32,8 @@ const userSchema = new Schema(
       match: /^(#+\w{2,})( #+\w{2,}){0,5}$/
     },
     state: { type: String, enum: ["online", "offline", "blocked"] },
-    channelsBookmark: { type: Array }
+    // Array of chatkit Room IDs
+    channelsBookmark: [ {type: Number} ],
   },
   {
     timestamps: true

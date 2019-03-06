@@ -4,13 +4,6 @@ const User = require("../models/user-model");
 
 const router = express.Router();
 
-router.get("/:userName", (req, res, next) => {
-  const { userName } = req.params;
-
-  User.findOne({ name: { $eq: userName } })
-    .then(userDoc => res.json(userDoc))
-    .catch(err => next(err));
-});
 
 router.post("/:userName/edit-user", (req, res, next) => {
   const { userName } = req.params;
@@ -33,6 +26,29 @@ router.delete("/:userName/delete", (req, res, next) => {
 
   User.findOneAndDelete(userName)
     .then(userDeleted => res.json(userDeleted))
+    .catch(err => next(err));
+});
+
+router.patch("/favorite", (req, res, next) => {
+  const { roomId } = req.body;
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $addToSet: { channelsBookmark: roomId } },
+    { new: true, runValidators: true }
+  )
+    .then(userDoc => res.json(userDoc))
+    .catch(err => next(err));
+});
+
+router.get("/favorite", (req, res, next) => {
+  res.json(req.user.channelsBookmark);
+});
+
+router.get("/:userName", (req, res, next) => {
+  const { userName } = req.params;
+
+  User.findOne({ name: { $eq: userName } })
+    .then(userDoc => res.json(userDoc))
     .catch(err => next(err));
 });
 

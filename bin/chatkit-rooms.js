@@ -11,7 +11,7 @@ const chatkit = new Chatkit.default({
 });
 
 mongoose
-  .connect("mongodb://localhost/linkall-server", { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -37,7 +37,7 @@ Country.find()
         }
         chatkit
           .createRoom({
-            creatorId: "Kevin",
+            creatorId: process.env.CHATKIT_ADMIN,
             name: roomName
           })
           .then(room => {
