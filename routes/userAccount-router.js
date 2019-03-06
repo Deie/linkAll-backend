@@ -22,13 +22,14 @@ router.post("/:userName/edit-user", (req, res, next) => {
     { runValidators: true, new: true }
   )
     .then(userDocEdit => {
-      res.json(userDocEdit), console.log(userDocEdit, "userdoc" );
+      res.json(userDocEdit);
+      console.log(userDocEdit, "userdoc");
     })
     .catch(err => next(err));
 });
 
-router.delete("/:userPseudo/delete", (req, res, next) => {
-  const { userPseudo } = req.params;
+router.delete("/:userName/delete", (req, res, next) => {
+  const { userName } = req.params;
 
   User.findOneAndDelete(userName)
     .then(userDeleted => res.json(userDeleted))
