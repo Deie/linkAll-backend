@@ -4,7 +4,6 @@ const User = require("../models/user-model");
 
 const router = express.Router();
 
-
 router.post("/:userName/edit-user", (req, res, next) => {
   const { userName } = req.params;
   const { fullName, location, age, description, avatarURL } = req.body;
@@ -51,7 +50,5 @@ router.get("/:userName", (req, res, next) => {
     .then(userDoc => res.json(userDoc))
     .catch(err => next(err));
 });
-
-
 
 module.exports = router;
