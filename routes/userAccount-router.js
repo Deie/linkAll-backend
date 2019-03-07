@@ -52,22 +52,6 @@ router.get("/:userName", (req, res, next) => {
     .catch(err => next(err));
 });
 
-// router.post("/:userName/bookmark", (req, res, next) => {
-//   const { userName } = req.params;
 
-//   console.log(req.body);
-
-//   User.findOne({ name: { $eq: userName } })
-//     .then(countrieFavArray => {
-//       Countrie.findByIdAndUpdate(
-//         req.user._id,
-//         { $push: { friendsBookmark: userVisited._id } },
-//         { runValidators: true, new: true }
-//       )
-//         .then(userDocEdit => res.json(userDocEdit))
-//         .catch(err => next(err));
-//     })
-//     .catch(err => next(err));
-// });
 
 module.exports = router;
