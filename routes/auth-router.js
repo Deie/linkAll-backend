@@ -55,7 +55,7 @@ router.post("/process-signup", (req, res, next) => {
       req.login(userDoc, () => {
         chatkit
           .createUser({
-            id: userDoc._id,
+            id: userDoc.name,
             name: userDoc.name,
             avatarURL: userDoc.avatarURL
           })
@@ -108,16 +108,3 @@ router.get("/logout", (req, res, next) => {
 });
 
 module.exports = router;
-
-//
-//KEV SESSION
-// PORT=5000
-// ENV=development
-// SESSION_SECRET=J^9ZkUw9+aXKwfig79q)KP)DergreFezfgFEfefzfez6$Y+
-
-// CHATKIT_LOCATOR=v1:us1:2993d953-3ea4-49a1-a84c-3c35a9cb6cf4
-// CHATKIT_KEY=ef295f5a-b0ad-4d42-9c81-4a2f2087cbf8:ds5KY6wSkLjEx8K1lZ4/Des3/M1TolER7NspcArSYec=
-
-// CLOUDINARY_NAME=deiefr
-// CLOUDINARY_KEY=263358196999662
-// CLOUDINARY_SECRET=eEq5F6EMYD6pFtsxNm4rbnYfhR4

@@ -1,5 +1,6 @@
 // this file (SEED) for adding the 4 categories to the API countries in our model
 //###############################################################################
+require("dotenv").config();
 
 const mongoose = require("mongoose");
 const countriesModel = require("../models/countries-model");
