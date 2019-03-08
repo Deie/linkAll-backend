@@ -41,6 +41,7 @@ router.patch("/favorite", (req, res, next) => {
 
 router.get("/favorite", (req, res, next) => {
   res.json(req.user.channelsBookmark);
+  console.log(req.user);
 });
 
 router.get("/:userName", (req, res, next) => {

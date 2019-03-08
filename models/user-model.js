@@ -19,7 +19,7 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
       required: true,
-      default: "../images/userDefault.svg" // linked to CHATKIT img
+      default: "../public/images/userDefault.svg" // linked to CHATKIT img
     },
     gender: {
       type: String,
@@ -33,7 +33,7 @@ const userSchema = new Schema(
     },
     state: { type: String, enum: ["online", "offline", "blocked"] },
     // Array of chatkit Room IDs
-    channelsBookmark: [ {type: Number} ],
+    channelsBookmark: [{ type: Number }]
   },
   {
     timestamps: true
